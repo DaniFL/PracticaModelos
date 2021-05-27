@@ -91,7 +91,7 @@ public class JFlexScraper {
                         if (valueHref){
                             enlacesA.add(key.getValor()); 
                         }   else if (valueSrc){
-                            enlacesImg.add(key.getValor()); 
+                            enlacesImg.add(key.getValor());  
                             }
                     }
                     break; 
@@ -116,7 +116,7 @@ public class JFlexScraper {
                 case 7:
                     if (key.getTipo() == Tipo.CLOSE){
                         estado = 0; 
-                        etiquetasAbiertas.pop(); 
+                        //etiquetasAbiertas.pop(); 
                     }
                     break;                                             
             }          
@@ -126,17 +126,30 @@ public class JFlexScraper {
 
     // Esta clase debe contener tu automata programado...
     public ArrayList<String> obtenerHiperenlaces() {
-        
-        return new ArrayList<String>();
+        return enlacesA;          
     }
 
     public ArrayList<String> obtenerHiperenlacesImagenes() {
-        // Habrá que programarlo..
-        return new ArrayList<String>();
+        return enlacesImg;  
     }
 
     public boolean esDocumentoHTMLBienBalanceado() {
-        // Habrá que programarlo..
-        return false;
+        if (etiquetasAbiertas.empty())return true; 
+        else return false;
+        
+    }
+    public void inicializar() throws Exception{
+        obtenerHiperenlaces(); 
+        obtenerHiperenlacesImagenes();
+        esDocumentoHTMLBienBalanceado();
+        toString(); 
+        
+       
+    }
+    public String toString(){
+        
+        String a = ("Urls: " + enlacesA + " Imágenes: " + enlacesImg + "Es documnento bien balanceado" + esDocumentoHTMLBienBalanceado());
+        System.out.println (a); 
+        return a; 
     }
 }
